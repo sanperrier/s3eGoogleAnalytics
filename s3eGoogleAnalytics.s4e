@@ -1,0 +1,7 @@
+include:
+#include <s3eTypes.h>
+  
+functions:
+s3eResult s3eGoogleAnalytics_Init(const char* ua_id, const char* screen_name) S3E_RESULT_ERROR run_on_os_thread
+s3eResult s3eGoogleAnalytics_Start() S3E_RESULT_ERROR run_on_os_thread
+s3eResult s3eGoogleAnalytics_End() S3E_RESULT_ERROR run_on_os_thread
