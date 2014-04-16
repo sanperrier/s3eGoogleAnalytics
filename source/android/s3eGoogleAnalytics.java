@@ -16,6 +16,7 @@ import com.google.analytics.tracking.android.Fields;
 import com.google.analytics.tracking.android.GoogleAnalytics;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.Tracker;
+import com.google.analytics.tracking.android.GAServiceManager;
 
 class s3eGoogleAnalytics
 {
@@ -25,7 +26,10 @@ class s3eGoogleAnalytics
     {
 		tracker = GoogleAnalytics.getInstance(LoaderActivity.m_Activity).getTracker(ua_id);
 		tracker.set(Fields.SCREEN_NAME, screenName);
-        return 0;
+
+		GAServiceManager.getInstance().setLocalDispatchPeriod(5);
+		
+		return 0;
     }
     public int s3eGoogleAnalytics_Start()
     {
