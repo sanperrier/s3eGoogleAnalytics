@@ -1,20 +1,24 @@
 s3eGoogleAnalytics
 ==================
 
-Extension for GoogleAnalytics for Android
+Android's extension for GoogleAnalytics
 
-* Integration (on Windows machine):
+HOW TO INTEGRATE (WINDOWS PLATFORM):
+------------------------------------
 
-1) Have your Marmalade SDK installed
-2) Execute both s3eGoogleAnalytics_android.mkb and s3eGoogleAnalytics_android_java.mkb by simply clicking on them or writting their names in cmd
-3) Include the s3eGoogleAnalytics in your project's mkb file
+1) Have your Marmalade SDK installed on your machine
 
-* Usage in code
+2) Execute both s3eGoogleAnalytics_android.mkb and s3eGoogleAnalytics_android_java.mkb by simply clicking on them or writting their names in command line
 
-To initialise it simply trigger s3eGoogleAnalytics_Init(const char* ua_id, const char* screen_name) where:
+3) Include the "s3eGoogleAnalytics" in your project's mkb file
+
+USAGE
+-----
+
+For initialization simply trigger s3eGoogleAnalytics_Init(const char* ua_id, const char* screen_name) where:
 - ua_id - your tracking id from your GoogleAnalytics account
-- screen_name - your Screen name, most commonly on Android mobile your game's package name com.companyname.mysupergame
+- screen_name - your Screen Name [1], most commonly on mobile your game's package name, like for example:  com.companyname.mygame
 
-To start a new session simply use s3eGoogleAnalytics_Start()
+To start a new session simply use s3eGoogleAnalytics_Start() and to end it use s3eGoogleAnalytics_End()
 
-Similarly use s3eGoogleAnalytics_End() to end the session 
+[1] https://developers.google.com/analytics/devguides/collection/android/v3/screens
