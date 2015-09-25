@@ -11,4 +11,12 @@
 #define S3E_EXT_GOOGLEANALYTICS_NAME "s3eGoogleAnalytics"
 #define S3E_EXT_GOOGLEANALYTICS_HASH 0x95f3a0d5
 
+#ifdef S3E_EXT_REGISTER
+#ifndef S3E_EXT_REGISTER_KEY
+#define S3E_EXT_REGISTER_KEY(name, num, key) S3E_EXT_REGISTER(name, num)
+#endif
+S3E_EXT_REGISTER("s3eGoogleAnalytics", 3)
+#else
+
+#endif /* S3E_EXT_REGISTER */
 #endif /* !S3EGOOGLEANALYTICS_AUTODEFS_H */

@@ -64,7 +64,7 @@ void s3eGoogleAnalyticsRegisterExt()
     /*
      * Register the extension
      */
-    s3eEdkRegister("s3eGoogleAnalytics", funcPtrs, sizeof(funcPtrs), flags, s3eGoogleAnalyticsInit, s3eGoogleAnalyticsTerminate, 0);
+s3eEdkRegister("s3eGoogleAnalytics", funcPtrs, sizeof(funcPtrs), flags, s3eGoogleAnalyticsInit, s3eGoogleAnalyticsTerminate, 0);
 }
 
 #if !defined S3E_BUILD_S3ELOADER

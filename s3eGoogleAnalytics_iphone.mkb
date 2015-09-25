@@ -1,0 +1,14 @@
+#!/usr/bin/env mkb
+# Builder mkb file for the s3eGoogleAnalytics extension on iphone
+platform IPHONE
+
+options
+{
+    arm
+    lib
+    output-name="lib/iphone/libs3eGoogleAnalytics.a"
+    output-name-debug="lib/iphone/libs3eGoogleAnalytics_d.a"
+}
+define S3E_BUILD_EXT
+
+subproject s3eGoogleAnalytics_build

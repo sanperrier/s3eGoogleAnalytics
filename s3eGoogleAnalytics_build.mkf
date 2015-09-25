@@ -5,6 +5,7 @@ display_name "Extensions/s3eGoogleAnalytics"
 
 includepath source/h
 includepath h
+includepath GA_SDK/iphone
 
 defines
 {
@@ -34,7 +35,15 @@ if {{defined I3D_OS_IPHONE}}
         ["source"]
         (use_first_found, source/iphone, source/generic)
         s3eGoogleAnalytics_platform.mm
-        #Add any iphone-specific files here
+
+        #["GA_SDK"]
+        #(GA_SDK/iphone)
+	#GAI.h	#GAIDictionaryBuilder.h	#GAIEcommerceFields.h	#GAIEcommerceProduct.h	#GAIEcommerceProductAction.h	#GAIEcommercePromotion.h	#GAIFields.h	#GAILogger.h	#GAITrackedViewController.h	#GAITracker.h
+    }
+
+    options
+    {
+        cflags="-F$CWD/GA_SDK/iphone"
     }
 }
 

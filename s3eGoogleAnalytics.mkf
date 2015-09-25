@@ -22,6 +22,10 @@ files
     (interface)
     s3eGoogleAnalytics_interface.cpp
     s3eGoogleAnalytics.defines.txt
+	
+	["docs"]
+    (docs)
+    app.config.txt
 }
 
 defines
@@ -37,7 +41,9 @@ if {{ not defined IW_MKF_IWCRT}}
 #Include the extension's jar file during deployment
 deployments
 {
-    android-external-jars="lib/android/libGoogleAnalyticsServices.jar"
-    android-external-jars="lib/android/s3eGoogleAnalytics.jar"
-    android-so="lib/android/libs3eGoogleAnalytics.so"
+    #iphone-link-opts="-lsqlite3"
+    iphone-link-opts="-weak_framework CoreData"
+    iphone-link-lib="s3eGoogleAnalytics"
+    iphone-link-lib="GoogleAnalyticsServices"
+    iphone-link-libdir="lib/iphone"
 }

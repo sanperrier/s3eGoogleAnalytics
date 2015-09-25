@@ -32,6 +32,8 @@ s3eResult s3eGoogleAnalytics_Start();
 
 s3eResult s3eGoogleAnalytics_End();
 
+// \cond HIDDEN_DEFINES
 S3E_END_C_DECL
+// \endcond
 
 #endif /* !S3E_EXT_GOOGLEANALYTICS_H */
