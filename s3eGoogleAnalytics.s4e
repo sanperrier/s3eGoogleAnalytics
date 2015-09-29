@@ -1,7 +1,15 @@
 include:
 #include <s3eTypes.h>
   
+enum s3eGoogleAnalyticsLogLevel {
+  s3eGoogleAnalyticsLogLevelNone = 0,
+  s3eGoogleAnalyticsLogLevelError = 1,
+  s3eGoogleAnalyticsLogLevelWarning = 2,
+  s3eGoogleAnalyticsLogLevelInfo = 3,
+  s3eGoogleAnalyticsLogLevelVerbose = 4
+};
+
 functions:
-s3eResult s3eGoogleAnalytics_Init(const char* ua_id, const char* screen_name) S3E_RESULT_ERROR run_on_os_thread
-s3eResult s3eGoogleAnalytics_Start() S3E_RESULT_ERROR run_on_os_thread
-s3eResult s3eGoogleAnalytics_End() S3E_RESULT_ERROR run_on_os_thread
+void s3eGoogleAnalytics_SetScreenName(const char* screen_name) run_on_os_thread
+void s3eGoogleAnalytics_SetUserID(const char* user_name) run_on_os_thread
+void s3eGoogleAnalytics_SetLogLevel(s3eGoogleAnalyticsLogLevel level) run_on_os_thread

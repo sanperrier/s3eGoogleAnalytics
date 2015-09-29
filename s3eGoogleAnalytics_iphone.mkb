@@ -4,7 +4,6 @@ platform IPHONE
 
 options
 {
-    arm
     lib
     output-name="lib/iphone/libs3eGoogleAnalytics.a"
     output-name-debug="lib/iphone/libs3eGoogleAnalytics_d.a"

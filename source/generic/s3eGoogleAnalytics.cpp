@@ -23,17 +23,17 @@ void s3eGoogleAnalyticsTerminate()
     s3eGoogleAnalyticsTerminate_platform();
 }
 
-s3eResult s3eGoogleAnalytics_Init(const char* ua_id, const char* screen_name)
+void s3eGoogleAnalytics_SetScreenName(const char* screen_name)
 {
-	return s3eGoogleAnalytics_Init_platform(ua_id, screen_name);
+	s3eGoogleAnalytics_SetScreenName_platform(screen_name);
 }
 
-s3eResult s3eGoogleAnalytics_Start()
+void s3eGoogleAnalytics_SetUserID(const char* user_name)
 {
-	return s3eGoogleAnalytics_Start_platform();
+	s3eGoogleAnalytics_SetUserID_platform(user_name);
 }
 
-s3eResult s3eGoogleAnalytics_End()
+void s3eGoogleAnalytics_SetLogLevel(s3eGoogleAnalyticsLogLevel level)
 {
-	return s3eGoogleAnalytics_End_platform();
+	s3eGoogleAnalytics_SetLogLevel_platform(level);
 }

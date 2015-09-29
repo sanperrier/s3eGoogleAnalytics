@@ -1,5 +1,5 @@
 /*
- * iphone-specific implementation of the s3eAppsFlyer extension.
+ * iphone-specific implementation of the s3eGoogleAnalytics extension.
  * Add any platform-specific functionality here.
  */
 /*
@@ -7,58 +7,52 @@
  * be overwritten (unless --force is specified) and is intended to be modified.
  */
 #include "s3eGoogleAnalytics_internal.h"
-
-#include "s3eEdk.h"
-#include "IwDebug.h"
 #include "s3eConfig.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
 
-#include "../GA_SDK/GAI.h"
-#import <UIKit/UIKit.h>
-
-s3eResult s3eGoogleAnalyticsInit_platform() {
-//    char appleAppId[S3E_CONFIG_STRING_MAX+8] = {'\0'};
-//    if (s3eConfigGetString("GoogleAnalytics", "appleAppId", appleAppId) == S3E_RESULT_ERROR)
-//    {
-//        
-//    }
-//    
-//    char devKey[S3E_CONFIG_STRING_MAX+8] = {'\0'};
-//    if (s3eConfigGetString("GoogleAnalytics", "TrackingId", devKey) == S3E_RESULT_ERROR)
-//    {
-//        
-//    }
-//    
-//    [GAI sharedInstance].dispatchInterval = -1;
-//    [GAI sharedInstance].optOut = YES;
-//    [GAI sharedInstance].trackUncaughtExceptions = YES;
-//    id tracker = [[GAI sharedInstance] trackerWithTrackingId:[NSString stringWithUTF8String:devKey]];
+s3eResult s3eGoogleAnalyticsInit_platform()
+{
+    char* devKey = new char[0xff];
+    if (s3eConfigGetString("GoogleAnalytics", "TrackingId", devKey) == S3E_RESULT_ERROR)
+    {
+        
+    }
     
+    [GAI sharedInstance].dispatchInterval = 60;
+    [GAI sharedInstance].optOut = NO;
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    id tracker = [[GAI sharedInstance] trackerWithTrackingId:[NSString stringWithUTF8String:devKey]];
+    
+    // Add any platform-specific initialisation code here
     return S3E_RESULT_SUCCESS;
 }
 
 void s3eGoogleAnalyticsTerminate_platform()
-{
-    // Add any platform-specific termination code here
+{ 
 }
 
-s3eResult s3eGoogleAnalytics_Init_platform(const char* ua_id, const char* screen_name)
+void s3eGoogleAnalytics_SetScreenName_platform(const char* screen_name)
 {
-    [GAI sharedInstance].dispatchInterval = -1;
-    [GAI sharedInstance].optOut = YES;
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    id tracker = [[GAI sharedInstance] trackerWithTrackingId:[NSString stringWithUTF8String:ua_id]];
-
-    return S3E_RESULT_SUCCESS;
+    if (screen_name)
+    {
+        [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName
+                                             value:[NSString stringWithUTF8String:screen_name]];
+        [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createScreenView] build]];
+    }
 }
 
-s3eResult s3eGoogleAnalytics_Start_platform()
+void s3eGoogleAnalytics_SetUserID_platform(const char* user_name)
 {
-
-    return S3E_RESULT_SUCCESS;
+    if (user_name)
+    {
+        [[[GAI sharedInstance] defaultTracker] set:kGAIUserId
+                                             value:[NSString stringWithUTF8String:user_name]];
+    }
 }
 
-s3eResult s3eGoogleAnalytics_End_platform()
+void s3eGoogleAnalytics_SetLogLevel_platform(s3eGoogleAnalyticsLogLevel level)
 {
-
-    return S3E_RESULT_SUCCESS;
+    [[GAI sharedInstance].logger setLogLevel:(GAILogLevel)level];
 }

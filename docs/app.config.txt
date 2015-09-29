@@ -1,3 +1,0 @@
-[GoogleAnalytics]
-appleAppId                  <string>    AppId
-TrackingId                  <string>    Key

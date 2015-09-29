@@ -24,27 +24,27 @@ extern void s3eGoogleAnalyticsTerminate();
 // code is oftern build standalone, outside the main loader build.
 #if defined I3D_OS_IPHONE || defined I3D_OS_OSX || defined I3D_OS_LINUX || defined I3D_OS_WINDOWS
 
-static s3eResult s3eGoogleAnalytics_Init_wrap(const char* ua_id, const char* screen_name)
+static void s3eGoogleAnalytics_SetScreenName_wrap(const char* screen_name)
 {
-    IwTrace(GOOGLEANALYTICS_VERBOSE, ("calling s3eGoogleAnalytics func on main thread: s3eGoogleAnalytics_Init"));
-    return (s3eResult)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eGoogleAnalytics_Init, 2, ua_id, screen_name);
+    IwTrace(GOOGLEANALYTICS_VERBOSE, ("calling s3eGoogleAnalytics func on main thread: s3eGoogleAnalytics_SetScreenName"));
+    s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eGoogleAnalytics_SetScreenName, 1, screen_name);
 }
 
-static s3eResult s3eGoogleAnalytics_Start_wrap()
+static void s3eGoogleAnalytics_SetUserID_wrap(const char* user_name)
 {
-    IwTrace(GOOGLEANALYTICS_VERBOSE, ("calling s3eGoogleAnalytics func on main thread: s3eGoogleAnalytics_Start"));
-    return (s3eResult)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eGoogleAnalytics_Start, 0);
+    IwTrace(GOOGLEANALYTICS_VERBOSE, ("calling s3eGoogleAnalytics func on main thread: s3eGoogleAnalytics_SetUserID"));
+    s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eGoogleAnalytics_SetUserID, 1, user_name);
 }
 
-static s3eResult s3eGoogleAnalytics_End_wrap()
+static void s3eGoogleAnalytics_SetLogLevel_wrap(s3eGoogleAnalyticsLogLevel level)
 {
-    IwTrace(GOOGLEANALYTICS_VERBOSE, ("calling s3eGoogleAnalytics func on main thread: s3eGoogleAnalytics_End"));
-    return (s3eResult)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eGoogleAnalytics_End, 0);
+    IwTrace(GOOGLEANALYTICS_VERBOSE, ("calling s3eGoogleAnalytics func on main thread: s3eGoogleAnalytics_SetLogLevel"));
+    s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eGoogleAnalytics_SetLogLevel, 1, level);
 }
 
-#define s3eGoogleAnalytics_Init s3eGoogleAnalytics_Init_wrap
-#define s3eGoogleAnalytics_Start s3eGoogleAnalytics_Start_wrap
-#define s3eGoogleAnalytics_End s3eGoogleAnalytics_End_wrap
+#define s3eGoogleAnalytics_SetScreenName s3eGoogleAnalytics_SetScreenName_wrap
+#define s3eGoogleAnalytics_SetUserID s3eGoogleAnalytics_SetUserID_wrap
+#define s3eGoogleAnalytics_SetLogLevel s3eGoogleAnalytics_SetLogLevel_wrap
 
 #endif
 
@@ -52,9 +52,9 @@ void s3eGoogleAnalyticsRegisterExt()
 {
     /* fill in the function pointer struct for this extension */
     void* funcPtrs[3];
-    funcPtrs[0] = (void*)s3eGoogleAnalytics_Init;
-    funcPtrs[1] = (void*)s3eGoogleAnalytics_Start;
-    funcPtrs[2] = (void*)s3eGoogleAnalytics_End;
+    funcPtrs[0] = (void*)s3eGoogleAnalytics_SetScreenName;
+    funcPtrs[1] = (void*)s3eGoogleAnalytics_SetUserID;
+    funcPtrs[2] = (void*)s3eGoogleAnalytics_SetLogLevel;
 
     /*
      * Flags that specify the extension's use of locking and stackswitching

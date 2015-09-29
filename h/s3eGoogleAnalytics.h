@@ -17,6 +17,14 @@
 #define S3E_EXT_GOOGLEANALYTICS_H
 
 #include <s3eTypes.h>
+  
+enum s3eGoogleAnalyticsLogLevel {
+  s3eGoogleAnalyticsLogLevelNone = 0,
+  s3eGoogleAnalyticsLogLevelError = 1,
+  s3eGoogleAnalyticsLogLevelWarning = 2,
+  s3eGoogleAnalyticsLogLevelInfo = 3,
+  s3eGoogleAnalyticsLogLevelVerbose = 4
+};
 // \cond HIDDEN_DEFINES
 S3E_BEGIN_C_DECL
 // \endcond
@@ -26,11 +34,11 @@ S3E_BEGIN_C_DECL
  */
 s3eBool s3eGoogleAnalyticsAvailable();
 
-s3eResult s3eGoogleAnalytics_Init(const char* ua_id, const char* screen_name);
+void s3eGoogleAnalytics_SetScreenName(const char* screen_name);
 
-s3eResult s3eGoogleAnalytics_Start();
+void s3eGoogleAnalytics_SetUserID(const char* user_name);
 
-s3eResult s3eGoogleAnalytics_End();
+void s3eGoogleAnalytics_SetLogLevel(s3eGoogleAnalyticsLogLevel level);
 
 // \cond HIDDEN_DEFINES
 S3E_END_C_DECL

@@ -42,11 +42,11 @@ void s3eGoogleAnalyticsTerminate();
  * Platform-specific termination, implemented on each platform
  */
 void s3eGoogleAnalyticsTerminate_platform();
-s3eResult s3eGoogleAnalytics_Init_platform(const char* ua_id, const char* screen_name);
+void s3eGoogleAnalytics_SetScreenName_platform(const char* screen_name);
 
-s3eResult s3eGoogleAnalytics_Start_platform();
+void s3eGoogleAnalytics_SetUserID_platform(const char* user_name);
 
-s3eResult s3eGoogleAnalytics_End_platform();
+void s3eGoogleAnalytics_SetLogLevel_platform(s3eGoogleAnalyticsLogLevel level);
 
 
 #endif /* !S3EGOOGLEANALYTICS_INTERNAL_H */

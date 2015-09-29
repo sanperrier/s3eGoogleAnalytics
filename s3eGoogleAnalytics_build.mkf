@@ -36,11 +36,10 @@ if {{defined I3D_OS_IPHONE}}
         (use_first_found, source/iphone, source/generic)
         s3eGoogleAnalytics_platform.mm
 
-        #["GA_SDK"]
-        #(GA_SDK/iphone)
-	#GAI.h	#GAIDictionaryBuilder.h	#GAIEcommerceFields.h	#GAIEcommerceProduct.h	#GAIEcommerceProductAction.h	#GAIEcommercePromotion.h	#GAIFields.h	#GAILogger.h	#GAITrackedViewController.h	#GAITracker.h
+        ["GA_SDK"]
+        (GA_SDK/iphone)
+        GAI.h
     }
-
     options
     {
         cflags="-F$CWD/GA_SDK/iphone"
@@ -139,12 +138,28 @@ if {{defined I3D_OS_WS81}}
     }
 }
 
+if {{defined I3D_OS_WP81}}
+{
+    files
+    {
+        ["h"]
+        (source/wp81)
+        s3eGoogleAnalytics_shim.h
+        ["source"]
+        (use_first_found, source/wp81, source/generic)
+        s3eGoogleAnalytics_platform.cpp
+        s3eGoogleAnalytics_shim.cpp
+        #Add any wp81-specific files here
+    }
+}
+
 files
 {
 
     # Add any platform-independent files here
     # Note that if the file exists in the platform-specific directory
     # it will be taken from there instead of 'generic'
+    (source/generic)
     s3eGoogleAnalytics_register.cpp
     s3eGoogleAnalytics.cpp
 

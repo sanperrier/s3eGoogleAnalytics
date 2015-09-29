@@ -23,18 +23,18 @@
 /**
  * Definitions for functions types passed to/from s3eExt interface
  */
-typedef  s3eResult(*s3eGoogleAnalytics_Init_t)(const char* ua_id, const char* screen_name);
-typedef  s3eResult(*s3eGoogleAnalytics_Start_t)();
-typedef  s3eResult(*s3eGoogleAnalytics_End_t)();
+typedef       void(*s3eGoogleAnalytics_SetScreenName_t)(const char* screen_name);
+typedef       void(*s3eGoogleAnalytics_SetUserID_t)(const char* user_name);
+typedef       void(*s3eGoogleAnalytics_SetLogLevel_t)(s3eGoogleAnalyticsLogLevel level);
 
 /**
  * struct that gets filled in by s3eGoogleAnalyticsRegister
  */
 typedef struct s3eGoogleAnalyticsFuncs
 {
-    s3eGoogleAnalytics_Init_t m_s3eGoogleAnalytics_Init;
-    s3eGoogleAnalytics_Start_t m_s3eGoogleAnalytics_Start;
-    s3eGoogleAnalytics_End_t m_s3eGoogleAnalytics_End;
+    s3eGoogleAnalytics_SetScreenName_t m_s3eGoogleAnalytics_SetScreenName;
+    s3eGoogleAnalytics_SetUserID_t m_s3eGoogleAnalytics_SetUserID;
+    s3eGoogleAnalytics_SetLogLevel_t m_s3eGoogleAnalytics_SetLogLevel;
 } s3eGoogleAnalyticsFuncs;
 
 static s3eGoogleAnalyticsFuncs g_Ext;
@@ -80,62 +80,62 @@ s3eBool s3eGoogleAnalyticsAvailable()
     return g_GotExt ? S3E_TRUE : S3E_FALSE;
 }
 
-s3eResult s3eGoogleAnalytics_Init(const char* ua_id, const char* screen_name)
+void s3eGoogleAnalytics_SetScreenName(const char* screen_name)
 {
-    IwTrace(GOOGLEANALYTICS_VERBOSE, ("calling s3eGoogleAnalytics[0] func: s3eGoogleAnalytics_Init"));
+    IwTrace(GOOGLEANALYTICS_VERBOSE, ("calling s3eGoogleAnalytics[0] func: s3eGoogleAnalytics_SetScreenName"));
 
     if (!_extLoad())
-        return S3E_RESULT_ERROR;
+        return;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_s3eGoogleAnalytics_Init);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_s3eGoogleAnalytics_SetScreenName);
 #endif
 
-    s3eResult ret = g_Ext.m_s3eGoogleAnalytics_Init(ua_id, screen_name);
+    g_Ext.m_s3eGoogleAnalytics_SetScreenName(screen_name);
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_s3eGoogleAnalytics_Init);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_s3eGoogleAnalytics_SetScreenName);
 #endif
 
-    return ret;
+    return;
 }
 
-s3eResult s3eGoogleAnalytics_Start()
+void s3eGoogleAnalytics_SetUserID(const char* user_name)
 {
-    IwTrace(GOOGLEANALYTICS_VERBOSE, ("calling s3eGoogleAnalytics[1] func: s3eGoogleAnalytics_Start"));
+    IwTrace(GOOGLEANALYTICS_VERBOSE, ("calling s3eGoogleAnalytics[1] func: s3eGoogleAnalytics_SetUserID"));
 
     if (!_extLoad())
-        return S3E_RESULT_ERROR;
+        return;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_s3eGoogleAnalytics_Start);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_s3eGoogleAnalytics_SetUserID);
 #endif
 
-    s3eResult ret = g_Ext.m_s3eGoogleAnalytics_Start();
+    g_Ext.m_s3eGoogleAnalytics_SetUserID(user_name);
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_s3eGoogleAnalytics_Start);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_s3eGoogleAnalytics_SetUserID);
 #endif
 
-    return ret;
+    return;
 }
 
-s3eResult s3eGoogleAnalytics_End()
+void s3eGoogleAnalytics_SetLogLevel(s3eGoogleAnalyticsLogLevel level)
 {
-    IwTrace(GOOGLEANALYTICS_VERBOSE, ("calling s3eGoogleAnalytics[2] func: s3eGoogleAnalytics_End"));
+    IwTrace(GOOGLEANALYTICS_VERBOSE, ("calling s3eGoogleAnalytics[2] func: s3eGoogleAnalytics_SetLogLevel"));
 
     if (!_extLoad())
-        return S3E_RESULT_ERROR;
+        return;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_s3eGoogleAnalytics_End);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_s3eGoogleAnalytics_SetLogLevel);
 #endif
 
-    s3eResult ret = g_Ext.m_s3eGoogleAnalytics_End();
+    g_Ext.m_s3eGoogleAnalytics_SetLogLevel(level);
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_s3eGoogleAnalytics_End);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_s3eGoogleAnalytics_SetLogLevel);
 #endif
 
-    return ret;
+    return;
 }
