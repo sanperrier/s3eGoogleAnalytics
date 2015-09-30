@@ -1,0 +1,2 @@
+[GoogleAnalytics]
+TrackingId                  <string>    UA_ID
